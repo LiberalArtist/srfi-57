@@ -1,17 +1,16 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML><HEAD><title>SRFI 57: Records</title>
+<HTML lang="en"><HEAD><title>SRFI 57: Records</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/srfi.css" type="text/css" />
+  <link rel="stylesheet" href="https://srfi.schemers.org/srfi.css" type="text/css" />
+  <link href="/favicon.png" rel="icon" sizes="192x192" type="image/png">
 </HEAD>
 <BODY>
-<H1>Title</H1> 
-Records
+<h1><a href="https://srfi.schemers.org/"><img class="srfi-logo" src="https://srfi.schemers.org/srfi-logo.svg" alt="SRFI surfboard logo" /></a>57: Records</h1>
 
-<H1>Author</H1> 
-Andr&eacute; van Tonder 
+<p>by Andr&eacute; van Tonder</p>
 
-<H1>Status</H1> 
+<h2>Status</h2>
 
 <p>This SRFI is currently in <em>final</em> status.  Here is <a href="https://srfi.schemers.org/srfi-process.html">an explanation</a> of each status that a SRFI can hold.  To provide input on this SRFI, please send email to <code><a href="mailto:srfi+minus+57  +at+srfi+dotschemers+dot+org">srfi-57  @<span class="antispam">nospam</span>srfi.schemers.org</a></code>.  To subscribe to the list, follow <a href="https://srfi.schemers.org/srfi-list-subscribe.html">these instructions</a>.  You can access previous messages via the mailing list <a href="https://srfi-email.schemers.org/srfi-57  ">archive</a>.</p>
 <UL>
@@ -25,7 +24,7 @@ Andr&eacute; van Tonder
   <LI>Final: 2005-03-07</LI>
 </UL>
 
-<H1>Abstract</H1>
+<h2>Abstract</h2>
 
 We describe a syntax for defining record types.    
 A predicate, constructor, 
@@ -41,7 +40,7 @@ field label, for in-place and for functional record
 update, and for composing records. 
 
 
-<H1>Rationale</H1>
+<h2>Rationale</h2>
 
 We extend the existing SRFI-9 [1] with the following features,
 each listed with a brief justification.  Expanded rationales appear
@@ -71,9 +70,9 @@ in the specification section below.
 </li></ul>
 
   
-<H1>Specification</H1>
+<h2>Specification</h2>
 
-<h2>Declaration</h2>
+<h3>Declaration</h3>
 
 <pre> &lt;command or definition&gt;           
    -&gt; &lt;record type definition&gt;          
@@ -127,7 +126,7 @@ in the specification section below.
 
 </pre>
 
-<h3>Record types</h3>
+<h4>Record types</h4>
 
 An instance of <code>define-record-type</code> is equivalent to the following:
 
@@ -223,7 +222,7 @@ specifies the behaviour of <code>define-record-type</code> at
 top-level.  
   
 
-</p><h3>Record type schemes</h3>
+</p><h4>Record type schemes</h4>
 
 An instance of <code>define-record-scheme</code> is equivalent to the following:
 
@@ -313,9 +312,9 @@ An instance of <code>define-record-scheme</code> is equivalent to the following:
 
 
 
-<p></p><h3>Examples</h3>
+<p></p><h4>Examples</h4>
 
-<h4>A simple record:</h4>
+<h5>A simple record:</h5>
 
 <pre>  (define-record-type point (make-point x y) point?
     (x get-x set-x!)           
@@ -329,7 +328,7 @@ An instance of <code>define-record-scheme</code> is equivalent to the following:
 </pre>
 
 
-<h4>Record type schemes:</h4>
+<h5>Record type schemes:</h5>
 
 Let's declare a couple of record schemes.  Record schemes do not have constructors.
 They introduce polymorphic predicates and accessors.
@@ -367,7 +366,7 @@ Predicates and accessors for concrete record types, when declared, are monomorph
   (color-point.info cp)            ==&gt; &lt;undefined&gt;
 </pre>
 
-<h4>Optional elements:</h4>
+<h5>Optional elements:</h5>
 
 Elements may be left out if not desired, as the following examples illustrate:
 <pre>  
@@ -400,7 +399,7 @@ punned.
 
 
 
-<p></p><h4>A note on repeated fields and redefinitions</h4>
+<p></p><h5>A note on repeated fields and redefinitions</h5>
 
 In the following example, two record type schemes define different accessors for the same field:
 
@@ -429,7 +428,7 @@ introduced in the <code>foo</code> declaration.
 
 
   
-<h2>Labeled record expressions</h2>
+<h3>Labeled record expressions</h3>
 
 The following syntax allows one to construct a record value by labels.  The result 
 is a record value of type <code>&lt;type name&gt;</code> with each field 
@@ -450,7 +449,7 @@ The order of evaluation of the expressions
 
 
 
-<h4>Rationale</h4>
+<h5>Rationale</h5>
 
 The traditional practice of instantiating record values with a positional constructor procedure
 can lead to code that is hard to read and fragile under common operations such as
@@ -461,7 +460,7 @@ Field labels are checked for validity
 and the macro may be compiled to a positional constructor at expansion time, 
 thus eliminating a large class of potential programmer errors at no cost in efficiency. 
 
-<h4>Example</h4>
+<h5>Example</h5>
 
 <pre>  (color-point (info 'hi) 
                (x 1) 
@@ -470,7 +469,7 @@ thus eliminating a large class of potential programmer errors at no cost in effi
                  ==&gt; (color-point (hue &lt;undefined&gt;) (x 1) (y 2) (info hi)) 
 </pre>
 
-<h2>Record update</h2>
+<h3>Record update</h3>
 
 The following syntax allows different forms of record update:
 
@@ -512,7 +511,7 @@ If this condition is not satisfied, an expansion time error must be signaled.
 In these forms, the order of evaluation of the expressions
 <code>&lt;expression&gt; ...</code> is undefined.
 
-</p><h4>Rationale</h4>
+</p><h5>Rationale</h5>
  
 A mechanism for functional update facilitates and encourages functional-style programming
 with records.  
@@ -530,7 +529,7 @@ See SRFI-1 for a good discussion of the rationale behind linear update procedure
 Note, however, that in contrast with the linear procedures in SRFI-1, <code>update!</code> here is <i>required</i>
 to mutate the original record.  
 
-</p><h4>Examples</h4>
+</p><h5>Examples</h5>
 
 Monomorphic update:
 <pre>  (define p (point (x 1) (y 2)))
@@ -552,7 +551,7 @@ In-place update:
 </pre>
 
 
-<h2>Record composition</h2>
+<h3>Record composition</h3>
 
 The following syntax provides a shorthand for composing record values:
 
@@ -586,7 +585,7 @@ expressions  <code>&lt;record&gt; ...</code> will be evaluated, even
 if their values might not be used in
 the result.  
 
-</p><h4>Rationale</h4>
+</p><h5>Rationale</h5>
 
 Calculi for composing record values, such as the above scheme, 
 may be used, for example, as units are used in 
@@ -597,7 +596,7 @@ argument but monomorphic in the result type.
 </p><p>
 
 
-</p><h4>Examples</h4>
+</p><h5>Examples</h5>
 
 Use <code>record-compose</code> for updates polymorphic in the argument but 
 monomorphic in the result type:
@@ -658,7 +657,7 @@ Small module-functor example:
 
 
 
-<H1>Implementation</H1>
+<h2>Implementation</h2>
 
 <p>
 The reference implementation uses the macro mechanism of 
@@ -701,7 +700,7 @@ The last section contains a few examples and (non-exhaustive) tests.
 
 
 </p>
-<h2>Reference implementation </h2>
+<h3>Reference implementation </h3>
 
 
 <pre>;============================================================================================
@@ -1174,7 +1173,7 @@ The last section contains a few examples and (non-exhaustive) tests.
 
 
 
-<h2>Tests and examples</h2>
+<h3>Tests and examples</h3>
 
 <pre>;============================================================================================
 ; Examples:
@@ -1333,7 +1332,7 @@ The last section contains a few examples and (non-exhaustive) tests.
 </pre>
 
 
-<h2>References</h2>
+<h3>References</h3>
 
 <pre>[1] Richard Kelsey, Defining Record Types, SRFI-9: https://srfi.schemers.org/srfi-9/srfi-9.html
 
@@ -1348,7 +1347,7 @@ The last section contains a few examples and (non-exhaustive) tests.
 </pre>
 
 
-<H1>Copyright</H1>
+<h2>Copyright</h2>
 
 <p>Copyright (C) Andr&eacute; van Tonder (2004). All Rights Reserved.</p>
 
